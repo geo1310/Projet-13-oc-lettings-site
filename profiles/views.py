@@ -2,18 +2,36 @@ from django.shortcuts import render
 from .models import Profile
 
 
-# Sed placerat quam in pulvinar commodo. Nullam laoreet consectetur ex, sed consequat libero pulvinar eget. Fusc
-# faucibus, urna quis auctor pharetra, massa dolor cursus neque, quis dictum lacus d
-def profiles_index(request):
+def index(request):
+    """
+    Fonction de vue pour la page d'accueil de l'application des profils.
+
+    Récupère tous les profils de la base de données et rend le template index.
+
+    Args:
+        request: L'objet de la requête HTTP.
+
+    Returns:
+        HttpResponse: HTML rendu de la page d'accueil avec la liste des profils.
+    """
     profiles_list = Profile.objects.all()
     context = {"profiles_list": profiles_list}
-    return render(request, "profiles_index.html", context)
+    return render(request, "profiles/index.html", context)
 
 
-# Aliquam sed metus eget nisi tincidunt ornare accumsan eget lac
-# laoreet neque quis, pellentesque dui. Nullam facilisis pharetra vulputate. Sed tincidunt, dolor id facilisis fringilla, eros leo tristique lacus,
-# it. Nam aliquam dignissim congue. Pellentesque habitant morbi tristique senectus et netus et males
 def profile(request, username):
+    """
+    Fonction de vue pour la page de détail d'un profil.
+
+    Récupère le profil par le nom d'utilisateur et rend le template du profil avec ses détails.
+
+    Args:
+        request: L'objet de la requête HTTP.
+        username: Le nom d'utilisateur du profil à récupérer.
+
+    Returns:
+        HttpResponse: HTML rendu de la page de détail du profil avec les informations du profil.
+    """
     profile = Profile.objects.get(user__username=username)
     context = {"profile": profile}
-    return render(request, "profile.html", context)
+    return render(request, "profiles/profile.html", context)

@@ -118,5 +118,4 @@ STATICFILES_DIRS = [
 ]
 
 # Définir le type de clé primaire par défaut
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

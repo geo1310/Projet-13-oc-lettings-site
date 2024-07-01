@@ -1,8 +1,17 @@
 from django.shortcuts import render
 
 
-# Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque molestie quam lobortis leo consectetur ullamcorper non id est. Praesent dictum, nulla eget feugiat sagittis, sem mi convallis eros,
-# vitae dapibus nisi lorem dapibus sem. Maecenas pharetra purus ipsum, eget consequat ipsum lobortis quis. Phasellus eleifend ex auctor venenatis tempus.
-# Aliquam vitae erat ac orci placerat luctus. Nullam elementum urna nisi, pellentesque iaculis enim cursus in. Praesent volutpat porttitor magna, non finibus neque cursus id.
 def index(request):
-    return render(request, "index.html")
+    """
+    Affiche la page d'accueil du site OC Lettings.
+
+    Cette vue rend le template 'oc_lettings_site/index.html'.
+    Ce template contient du contenu statique représentant la page d'accueil du site OC Lettings.
+
+    Parameters:
+    - request: Objet HttpRequest contenant les données de la requête HTTP.
+
+    Returns:
+    - HttpResponse: Renvoie la réponse HTTP rendue à partir du template spécifié.
+    """
+    return render(request, "oc_lettings_site/index.html")

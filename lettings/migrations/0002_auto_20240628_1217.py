@@ -10,7 +10,8 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-         migrations.RunSQL("""
+        migrations.RunSQL(
+            """
             INSERT INTO lettings_address (
                 id,
                 number,
@@ -31,8 +32,8 @@ class Migration(migrations.Migration):
                 country_iso_code
             FROM
                 oc_lettings_site_address;
-        """, 
-        reverse_sql="""
+        """,
+            reverse_sql="""
             INSERT INTO oc_lettings_site_address (
                 id,
                 number,
@@ -52,8 +53,8 @@ class Migration(migrations.Migration):
                 country_iso_code
             FROM
                 lettings_address;
-        """),
-
+        """,
+        ),
         migrations.RunSQL(
             """
             INSERT INTO lettings_letting (
@@ -80,7 +81,6 @@ class Migration(migrations.Migration):
                 address_id
             FROM
                 lettings_letting;
-            """
+            """,
         ),
-
     ]
