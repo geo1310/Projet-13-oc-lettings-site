@@ -50,6 +50,30 @@ def test_index_view(setup_profiles):
 
 
 @pytest.mark.django_db
+def test_index_view_with_no_profiles():
+    """
+    Teste la vue 'index' de l'application 'profiles' lorsque aucun profil n'est disponible.
+
+    Vérifie que la vue 'index' renvoie correctement le template 'index.html' même lorsqu'aucun
+    profil n'est trouvé dans la base de données.
+
+    Assertions :
+    - Vérifie le statut de la réponse HTTP (200 OK).
+    - Vérifie que le template 'index.html' est utilisé pour rendre la réponse.
+    - Vérifie qu'aucun profil n'est disponible en s'assurant que la variable 'profiles' est False.
+    """
+    client = Client()
+
+    profiles = False
+    path = reverse("profiles:index")
+    response = client.get(path)
+
+    assert response.status_code == 200
+    assertTemplateUsed(response, "profiles/index.html")
+    assert not profiles
+
+
+@pytest.mark.django_db
 def test_profile_view(setup_profiles):
     """
     Teste la vue 'profile' de l'application 'profiles'.
