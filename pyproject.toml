@@ -16,6 +16,8 @@ djhtml = "^3.0.6"
 pycln = "^2.4.0"
 pytest-html = "^4.1.1"
 django-coverage = "^1.2.4"
+coverage = "^7.5.4"
+pytest-coverage = "^0.0"
 
 
 [build-system]
