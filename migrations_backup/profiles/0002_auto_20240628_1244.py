@@ -16,7 +16,6 @@ class Migration(migrations.Migration):
                 id,
                 user_id,
                 favorite_city
-                
             )
             SELECT
                 id,
