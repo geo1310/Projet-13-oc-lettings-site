@@ -20,7 +20,6 @@ class Migration(migrations.Migration):
                 state,
                 zip_code,
                 country_iso_code
-                
             )
             SELECT
                 id,
