@@ -1,9 +1,12 @@
-# Images sur Docker Hub
+# Images Locales
 
 version: '3'
 
 services:
   web:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: gbriche/oc-lettings-site:web
     command: gunicorn --bind 0.0.0.0:8000 oc_lettings_site.wsgi:application
     volumes:
@@ -12,6 +15,9 @@ services:
       - "8000"
 
   nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
     image: gbriche/oc-lettings-site:nginx
     ports:
       - "80:80"
