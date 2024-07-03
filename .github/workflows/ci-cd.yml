@@ -41,7 +41,7 @@ jobs:
       - name: Run migrations
         run: poetry run python manage.py migrate
 
-      # Étape 6: Exécute les tests avec la couverture de code
+      # Étape 6: Exécute les tests avec une couverture de code minimum de 80%
       - name: Run tests with coverage
         run: |
           poetry run pytest --cov=. --cov-report=html --cov-fail-under=80
