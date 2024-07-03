@@ -17,6 +17,8 @@
             uses: actions/setup-python@v2
             with:
               python-version: 3.11.0
+            env:
+                NODE_VERSION: 20
           - name: Install Poetry
             run: pip install poetry
           - name: Install dependencies
@@ -32,6 +34,8 @@
             with:
               name: test-results
               path: reports/test-results.xml
+            env:
+                NODE_VERSION: 20
           - name: Archive coverage report
             if: always()
             uses: actions/upload-artifact@v2
