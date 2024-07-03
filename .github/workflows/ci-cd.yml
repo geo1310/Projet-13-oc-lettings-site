@@ -77,7 +77,8 @@ jobs:
       # Étape 11: Définit le tag Docker à partir du hash du commit
       - name: Set Docker tag
         id: set_tag
-        run: echo "::set-output name=tag::${{ github.sha }}"
+        run: |
+            echo "TAG=${{ github.sha }}" >> $GITHUB_ENV
 
   deploy:
     runs-on: ubuntu-latest
@@ -106,8 +107,8 @@ jobs:
       # Étape 4: Construit et pousse les images Docker
       - name: Build and push Docker images
         run: |
-          TAG="${{ steps.set_tag.outputs.tag }}"
-          docker-compose -f docker-compose.yml build --build-arg GIT_SHA=${{ github.sha }} --tag $TAG
+          TAG="${{ env.TAG }}"
+          docker-compose -f docker-compose.yml build --build-arg GIT_SHA=$TAG
           docker-compose -f docker-compose.yml push
 
       # Étape 5: Récupére les images Docker localement
