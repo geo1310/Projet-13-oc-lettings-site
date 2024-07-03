@@ -23,23 +23,23 @@ sentry_sdk.init(
 
 # logging
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'sentry': {
-            'level': 'WARNING',
-            'class': 'sentry_sdk.integrations.logging.EventHandler',
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "sentry": {
+            "level": "WARNING",
+            "class": "sentry_sdk.integrations.logging.EventHandler",
         },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
         },
     },
-    'loggers': {
-        'django': {
-            'handlers': ['sentry', 'console'],
-            'level': 'INFO',
-            'propagate': True,
+    "loggers": {
+        "django": {
+            "handlers": ["sentry", "console"],
+            "level": "INFO",
+            "propagate": True,
         },
     },
 }

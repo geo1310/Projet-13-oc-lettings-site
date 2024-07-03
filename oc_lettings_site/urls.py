@@ -25,5 +25,5 @@ if settings.DEBUG:
     urlpatterns += [
         path("404/", TemplateView.as_view(template_name="oc_lettings_site/404.html"), name="404"),
         path("500/", TemplateView.as_view(template_name="oc_lettings_site/500.html"), name="500"),
-        path('sentry-debug/', trigger_error),
+        path("sentry-debug/", trigger_error),
     ]
