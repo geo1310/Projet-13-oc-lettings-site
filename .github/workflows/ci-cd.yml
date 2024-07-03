@@ -3,10 +3,10 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
+      - '*'
   pull_request:
     branches:
-      - main
+      - '*'
 
 jobs:
   build:
@@ -50,6 +50,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
+
+    if: github.ref == 'refs/heads/main'  # Déploie uniquement depuis la branche principale
 
     steps:
       - name: Checkout code
