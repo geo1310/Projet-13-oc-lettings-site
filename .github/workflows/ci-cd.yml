@@ -33,6 +33,10 @@
           - name: Run tests with coverage
             run: poetry run pytest --cov=. --cov-report=html
               --cov-fail-under=80
+          - name: Lint code
+            run: poetry run flake8 .
+          - name: Format code with Black
+            run: poetry run black --check .
           - name: Archive test results
             if: failure()
             uses: actions/upload-artifact@v4
@@ -64,8 +68,7 @@
               sudo apt-get update
               sudo apt-get install docker-compose -y
           - name: Log in to Docker Hub
-            run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{
-              secrets.DOCKER_USERNAME }}" --password-stdin
+            run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
           - name: Build and push Docker images
             run: |
               docker-compose -f docker-compose.yml build
