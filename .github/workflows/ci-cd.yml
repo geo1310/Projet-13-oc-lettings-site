@@ -1,76 +1,116 @@
----
-    name: CI/CD Pipeline
-    on:
-      push:
-        branches:
-          - "*"
-      pull_request:
-        branches:
-          - "*"
-    jobs:
-      build:
-        runs-on: ubuntu-latest
-        steps:
-          - name: Checkout code
-            uses: actions/checkout@v3
-            with:
-                submodules: true
-                ref: ${{ github.ref }}
-            env:
-                NODE_VERSION: 20
-          - name: Set up Python 3.11.0
-            uses: actions/setup-python@v4
-            with:
-              python-version: 3.11.0
-            env:
-                NODE_VERSION: 20
-          - name: Install Poetry
-            run: pip install poetry
-          - name: Install dependencies
-            run: poetry install
-          - name: Run migrations
-            run: poetry run python manage.py migrate
-          - name: Run tests with coverage
-            run: poetry run pytest --cov=. --cov-report=html
-              --cov-fail-under=80
-          - name: Lint code
-            run: poetry run flake8 .
-          - name: Format code with Black
-            run: poetry run black --check .
-          - name: Archive test results
-            if: failure()
-            uses: actions/upload-artifact@v4
-            with:
-              name: test-results
-              path: reports/test-results.xml
-            env:
-                NODE_VERSION: 20
-          - name: Archive coverage report
-            if: always()
-            uses: actions/upload-artifact@v4
-            with:
-              name: coverage-report
-              path: htmlcov
-      deploy:
-        runs-on: ubuntu-latest
-        needs: build
-        if: github.ref == 'refs/heads/master'
-        steps:
-          - name: Checkout code
-            uses: actions/checkout@v3
-            with:
-                submodules: true
-                ref: ${{ github.ref }}
-            env:
-                NODE_VERSION: 20
-          - name: Install Docker Compose
-            run: |
-              sudo apt-get update
-              sudo apt-get install docker-compose -y
-          - name: Log in to Docker Hub
-            run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-          - name: Build and push Docker images
-            run: |
-              docker-compose -f docker-compose.yml build
-              docker-compose -f docker-compose.yml push
-    
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - "*"  # Déclenche le workflow sur tout push sur n'importe quelle branche
+  pull_request:
+    branches:
+      - "*"  # Déclenche le workflow sur toute pull request sur n'importe quelle branche
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Étape 1: Récupére le code source avec les sous-modules
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+          ref: ${{ github.ref }}  # Récupère la référence de la branche ou du commit
+        env:
+          NODE_VERSION: 20
+
+      # Étape 2: Configure Python 3.11.0
+      - name: Set up Python 3.11.0
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11.0
+        env:
+          NODE_VERSION: 20
+
+      # Étape 3: Installe Poetry et les dépendances du projet
+      - name: Install Poetry
+        run: pip install poetry
+
+      # Étape 4: Installe les dépendances du projet avec Poetry
+      - name: Install dependencies
+        run: poetry install
+
+      # Étape 5: Exécute les migrations de la base de données
+      - name: Run migrations
+        run: poetry run python manage.py migrate
+
+      # Étape 6: Exécute les tests avec la couverture de code
+      - name: Run tests with coverage
+        run: |
+          poetry run pytest --cov=. --cov-report=html --cov-fail-under=80
+
+      # Étape 7: Vérifie le style du code avec Flake8
+      - name: Lint code
+        run: poetry run flake8 .
+
+      # Étape 8: Vérifie le formatage du code avec Black
+      - name: Format code with Black
+        run: poetry run black --check .
+
+      # Étape 9: Archive les résultats des tests en cas d'échec
+      - name: Archive test results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: reports/test-results.xml
+        env:
+          NODE_VERSION: 20
+
+      # Étape 10: Toujours archiver le rapport de couverture
+      - name: Archive coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: htmlcov
+        env:
+          NODE_VERSION: 20
+
+      # Étape 11: Définit le tag Docker à partir du hash du commit
+      - name: Set Docker tag
+        id: set_tag
+        run: echo "::set-output name=tag::${{ github.sha }}"
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build  # Attend la fin du job 'build' avant de démarrer
+    if: github.ref == 'refs/heads/master'  # Déploie uniquement depuis la branche 'master'
+    steps:
+      # Étape 1: Récupére le code source avec les sous-modules
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+          ref: ${{ github.ref }}  # Récupère la référence de la branche ou du commit
+        env:
+          NODE_VERSION: 20
+
+      # Étape 2: Installe Docker Compose
+      - name: Install Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install docker-compose -y
+
+      # Étape 3: Se connecte à Docker Hub
+      - name: Log in to Docker Hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      # Étape 4: Construit et pousse les images Docker
+      - name: Build and push Docker images
+        run: |
+          TAG="${{ steps.set_tag.outputs.tag }}"
+          docker-compose -f docker-compose.yml build --build-arg GIT_SHA=${{ github.sha }} --tag $TAG
+          docker-compose -f docker-compose.yml push
+
+      # Étape 5: Récupére les images Docker localement
+      - name: Pull Docker images locally
+        run: |
+          docker-compose -f docker-compose.yml pull
