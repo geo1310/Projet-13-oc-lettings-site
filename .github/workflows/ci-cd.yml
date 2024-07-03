@@ -78,7 +78,7 @@ jobs:
       - name: Set Docker tag
         id: set_tag
         run: |
-            echo "TAG=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+            echo "TAG=$(git rev-parse --short HEAD)" >> ${GITHUB_ENV}
 
   deploy:
     runs-on: ubuntu-latest
@@ -107,13 +107,11 @@ jobs:
       # Étape 4: Construit et pousse les images Docker
       - name: Build and push Docker images
         run: |
-          TAG="${{ env.TAG }}"
-          docker-compose -f docker-compose.yml build --build-arg GIT_SHA=${TAG}
+          docker-compose -f docker-compose.yml build --build-arg GIT_SHA=${{ env.TAG }}
           docker-compose -f docker-compose.yml push
 
       # Étape 5: Récupére les images Docker localement
       - name: Pull Docker images locally
         run: |
-          TAG="${{ env.TAG }}"
-          docker-compose -f docker-compose.yml pull web-${TAG}
-          docker-compose -f docker-compose.yml pull nginx-${TAG}
+          docker-compose -f docker-compose.yml pull web-${{ env.TAG }}
+          docker-compose -f docker-compose.yml pull nginx-${{ env.TAG }}
