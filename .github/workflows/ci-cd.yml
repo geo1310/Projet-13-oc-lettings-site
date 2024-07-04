@@ -3,31 +3,30 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - "*"  # Déclenche le workflow sur tout push sur n'importe quelle branche
+      - "*"
   pull_request:
     branches:
-      - "*"  # Déclenche le workflow sur toute pull request sur n'importe quelle branche
+      - "*"
 
 jobs:
+
   build:
     runs-on: ubuntu-latest
+
     steps:
+
       # Étape 1: Récupére le code source avec les sous-modules
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: true
           ref: ${{ github.ref }}  # Récupère la référence de la branche ou du commit
-        env:
-          NODE_VERSION: 20
-
+        
       # Étape 2: Configure Python 3.11.0
       - name: Set up Python 3.11.0
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: 3.11.0
-        env:
-          NODE_VERSION: 20
 
       # Étape 3: Installe Poetry et les dépendances du projet
       - name: Install Poetry
@@ -61,8 +60,6 @@ jobs:
         with:
           name: test-results
           path: reports/test-results.xml
-        env:
-          NODE_VERSION: 20
 
       # Étape 10: Toujours archiver le rapport de couverture
       - name: Archive coverage report
@@ -71,47 +68,50 @@ jobs:
         with:
           name: coverage-report
           path: htmlcov
-        env:
-          NODE_VERSION: 20
-
-      # Étape 11: Définit le tag Docker à partir du hash du commit
-      - name: Set Docker tag
-        id: set_tag
-        run: |
-            echo "TAG=$(git rev-parse --short HEAD)" >> ${GITHUB_ENV}
 
   deploy:
     runs-on: ubuntu-latest
     needs: build  # Attend la fin du job 'build' avant de démarrer
+    
     if: github.ref == 'refs/heads/master'  # Déploie uniquement depuis la branche 'master'
+    
     steps:
-      # Étape 1: Récupére le code source avec les sous-modules
+
+      # Étape 1: Recovers source code with sub-modules
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: true
           ref: ${{ github.ref }}  # Récupère la référence de la branche ou du commit
-        env:
-          NODE_VERSION: 20
 
-      # Étape 2: Installe Docker Compose
+      # Étape 2: Install Docker Compose
       - name: Install Docker Compose
         run: |
           sudo apt-get update
           sudo apt-get install docker-compose -y
 
-      # Étape 3: Se connecte à Docker Hub
-      - name: Log in to Docker Hub
-        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      # Étape 3: Log in to DockerHub
+      - name: Log in to DockerHub
+        uses: docker/login-action@v3
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Étape 4: Construit et pousse les images Docker
-      - name: Build and push Docker images
-        run: |
-          docker-compose -f docker-compose.yml build --build-arg GIT_SHA=${{ env.TAG }}
-          docker-compose -f docker-compose.yml push
+      # Étape 4: Get short SHA for tagging
+      - name: Get short SHA
+        id: vars
+        run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
-      # Étape 5: Récupére les images Docker localement
-      - name: Pull Docker images locally
+      # Étape 5: Build, Tag, Push and Pull Docker images.
+      - name: Build, Tag, Push and Pull Docker images
         run: |
-          docker-compose -f docker-compose.yml pull web-${{ env.TAG }}
-          docker-compose -f docker-compose.yml pull nginx-${{ env.TAG }}
+          SHORT_SHA=${{ env.SHA_SHORT }}
+          SERVICES=$(docker-compose config --services)
+          for SERVICE in $SERVICES; do
+            IMAGE_NAME=$(docker-compose config | grep "image: " | grep "$SERVICE" | awk '{print $2}')
+            docker-compose build $SERVICE
+            docker tag $IMAGE_NAME:latest $IMAGE_NAME:$SHORT_SHA
+            docker push $IMAGE_NAME:$SHORT_SHA
+            docker pull $IMAGE_NAME:$SHORT_SHA
+          done

@@ -8,9 +8,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        GIT_SHA: ${GIT_SHA}
-    image: gbriche/oc-lettings-site:web-${GIT_SHA}
+      
+    image: gbriche/oc-lettings-site-web
     command: gunicorn --bind 0.0.0.0:8000 oc_lettings_site.wsgi:application
     volumes:
       - .:/app
@@ -21,7 +20,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.nginx
-    image: gbriche/oc-lettings-site:nginx-${GIT_SHA}
+    image: gbriche/oc-lettings-site-nginx
     ports:
       - "80:80"
     depends_on:
