@@ -23,4 +23,5 @@ RUN python manage.py collectstatic --noinput
 EXPOSE 8000
 
 # Étape 8 : Démarrer l'application Django avec gunicorn
+#CMD ["gunicorn", "--bind", "0.0.0.0:8000", "oc_lettings_site.asgi:application", "-k", "uvicorn.workers.UvicornWorker"]
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "oc_lettings_site.wsgi:application"]
