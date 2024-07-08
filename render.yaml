@@ -2,7 +2,6 @@ services:
   - type: web
     plan: free
     name: oc-lettings-site
-    runtime: python
     env: docker
     repo: https://github.com/geo1310/Python-OC-Lettings-FR.git
     dockerfilePath: Dockerfile
