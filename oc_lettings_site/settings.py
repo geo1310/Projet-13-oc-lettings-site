@@ -163,7 +163,11 @@ if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
     # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
     # and renames the files with unique names for each version to support long-term caching
-    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    STORAGES = {
+        'default': {
+            'ENGINE': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
+        },
+    }
 
 # Définir le type de clé primaire par défaut
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

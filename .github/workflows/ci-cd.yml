@@ -40,20 +40,24 @@ jobs:
       - name: Run migrations
         run: poetry run python manage.py migrate
 
-      # Étape 6: Exécute les tests avec une couverture de code minimum de 80%
+      # Étape 6: Collecte des fichiers statiques
+      - name: Collect static files
+        run: poetry run python manage.py collectstatic --noinput
+
+      # Étape 7: Exécute les tests avec une couverture de code minimum de 80%
       - name: Run tests with coverage
         run: |
           poetry run pytest --cov=. --cov-report=html --cov-fail-under=80
 
-      # Étape 7: Vérifie le style du code avec Flake8
+      # Étape 8: Vérifie le style du code avec Flake8
       - name: Lint code
         run: poetry run flake8 .
 
-      # Étape 8: Vérifie le formatage du code avec Black
+      # Étape 9: Vérifie le formatage du code avec Black
       - name: Format code with Black
         run: poetry run black --check .
 
-      # Étape 9: Archive les résultats des tests en cas d'échec
+      # Étape 10: Archive les résultats des tests en cas d'échec
       - name: Archive test results
         if: failure()
         uses: actions/upload-artifact@v4
@@ -61,7 +65,7 @@ jobs:
           name: test-results
           path: reports/test-results.xml
 
-      # Étape 10: Toujours archiver le rapport de couverture
+      # Étape 11: Toujours archiver le rapport de couverture
       - name: Archive coverage report
         if: always()
         uses: actions/upload-artifact@v4
