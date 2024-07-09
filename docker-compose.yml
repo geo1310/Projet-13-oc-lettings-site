@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: gbriche/oc-lettings-site-web
+    command: gunicorn --bind 0.0.0.0:8000 oc_lettings_site.wsgi:application
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
