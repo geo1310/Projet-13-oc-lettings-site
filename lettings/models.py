@@ -7,6 +7,7 @@ class Address(models.Model):
     Modèle représentant une adresse physique.
 
     Attributes:
+
     - number (PositiveIntegerField): Numéro de l'adresse.
     - street (CharField): Nom de la rue.
     - city (CharField): Ville.
@@ -34,6 +35,7 @@ class Letting(models.Model):
     Modèle représentant un bien à louer.
 
     Attributes:
+
     - title (CharField): Titre du bien.
     - address (OneToOneField): Adresse du bien (relation One-to-One avec le modèle Address).
     """

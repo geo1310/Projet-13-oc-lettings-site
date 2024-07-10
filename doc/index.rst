@@ -18,7 +18,7 @@ Welcome to oc-lettings-site's documentation!
    user_guide
    deployment_procedures
    technical_documentation
-   modules
+   modules_views
 
 
 

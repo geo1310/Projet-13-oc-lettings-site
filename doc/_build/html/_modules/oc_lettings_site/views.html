@@ -6,6 +6,7 @@
   <title>oc_lettings_site.views &mdash; oc-lettings-site  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=a27ef991" />
 
   
   <!--[if lt IE 9]>
@@ -43,14 +44,15 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../project_description.html">Project description</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../installation_instructions.html">Installation instructions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../quick_start_guide.html">Quick start guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../technologies_and_languages.html">Technologies and languages</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../database_structure.html">Database Structure</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../user_guide.html">User guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../deployment_procedures.html">Deployment procedure</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../project_description.html">Projet oc-lettings-site</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation_instructions.html">Instructions d’installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quick_start_guide.html">Guide de démarrage rapide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../technologies_and_languages.html">Technologies et langages de programmation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../database_structure.html">Structure de la base de données et modèles de données</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide.html">Guide d’utilisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../deployment_procedures.html">Procédures de déploiement et de gestion de l’application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../technical_documentation.html">Technical documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules_views.html">Modules des Vues</a></li>
 </ul>
 
         </div>
@@ -83,7 +85,7 @@
 
 
 <div class="viewcode-block" id="index">
-<a class="viewcode-back" href="../../modules.html#oc_lettings_site.views.index">[docs]</a>
+<a class="viewcode-back" href="../../modules_views.html#oc_lettings_site.views.index">[docs]</a>
 <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Affiche la page d&#39;accueil du site OC Lettings.</span>
@@ -92,9 +94,11 @@
 <span class="sd">    Ce template contient du contenu statique représentant la page d&#39;accueil du site OC Lettings.</span>
 
 <span class="sd">    Parameters:</span>
+
 <span class="sd">    - request: Objet HttpRequest contenant les données de la requête HTTP.</span>
 
 <span class="sd">    Returns:</span>
+
 <span class="sd">    - HttpResponse: Renvoie la réponse HTTP rendue à partir du template spécifié.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;oc_lettings_site/index.html&quot;</span><span class="p">)</span></div>
@@ -102,7 +106,7 @@
 
 
 <div class="viewcode-block" id="custom_handler404">
-<a class="viewcode-back" href="../../modules.html#oc_lettings_site.views.custom_handler404">[docs]</a>
+<a class="viewcode-back" href="../../modules_views.html#oc_lettings_site.views.custom_handler404">[docs]</a>
 <span class="k">def</span> <span class="nf">custom_handler404</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">exception</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Vue pour gérer les erreurs 404 (Page non trouvée).</span>
@@ -110,12 +114,14 @@
 <span class="sd">    Affiche le template &#39;oc_lettings_site/404.html&#39; avec un statut HTTP 404.</span>
 
 <span class="sd">    Parameters:</span>
+
 <span class="sd">    - request: Objet HttpRequest contenant les données de la requête HTTP.</span>
 <span class="sd">    - exception: L&#39;exception qui a déclenché l&#39;erreur 404 (optionnel).</span>
 
 <span class="sd">    Returns:</span>
+
 <span class="sd">    - HttpResponse: Renvoie la réponse HTTP rendue à partir du template spécifié</span>
-<span class="sd">    avec un statut 404.</span>
+<span class="sd">      avec un statut 404.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">sentry_sdk</span><span class="o">.</span><span class="n">capture_message</span><span class="p">(</span><span class="s2">&quot;Page non trouvée (404): </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">path</span><span class="p">),</span> <span class="n">level</span><span class="o">=</span><span class="s2">&quot;warning&quot;</span><span class="p">)</span>
 
@@ -124,7 +130,7 @@
 
 
 <div class="viewcode-block" id="custom_handler500">
-<a class="viewcode-back" href="../../modules.html#oc_lettings_site.views.custom_handler500">[docs]</a>
+<a class="viewcode-back" href="../../modules_views.html#oc_lettings_site.views.custom_handler500">[docs]</a>
 <span class="k">def</span> <span class="nf">custom_handler500</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Vue pour gérer les erreurs 500 (Erreur interne du serveur).</span>
@@ -132,11 +138,13 @@
 <span class="sd">    Affiche le template &#39;oc_lettings_site/500.html&#39; avec un statut HTTP 500.</span>
 
 <span class="sd">    Parameters:</span>
+
 <span class="sd">    - request: Objet HttpRequest contenant les données de la requête HTTP.</span>
 
 <span class="sd">    Returns:</span>
+
 <span class="sd">    - HttpResponse: Renvoie la réponse HTTP rendue à partir du template spécifié</span>
-<span class="sd">    avec un statut 500.</span>
+<span class="sd">      avec un statut 500.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">sentry_sdk</span><span class="o">.</span><span class="n">capture_exception</span><span class="p">()</span>

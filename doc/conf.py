@@ -1,4 +1,17 @@
+import os
+import sys
+import django
 from sphinx.application import Sphinx
+
+# Chemin absolu vers le répertoire du projet Django
+sys.path.insert(0, os.path.abspath('..'))
+
+# Configuration de l'environnement Django
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'oc_lettings_site.settings')
+
+# Chargez les paramètres Django
+django.setup()
+
 # Configuration file for the Sphinx documentation builder.
 #
 # For the full list of built-in configuration values, see the documentation:

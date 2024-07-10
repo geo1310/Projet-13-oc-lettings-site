@@ -89,6 +89,8 @@ python manage.py runserver
 
 L'application est accessible à l'adresse suivante :  __https://oc-lettings-site-cuqa.onrender.com__
 
+Interface d'administration : __https://oc-lettings-site-cuqa.onrender.com/admin/login/?next=/admin/__
+
 ### Images Docker :
 
 Les images Docker sont taguées avec le commit court.
