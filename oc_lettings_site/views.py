@@ -1,4 +1,5 @@
 from django.shortcuts import render
+import sentry_sdk
 
 
 def index(request):
@@ -31,6 +32,8 @@ def custom_handler404(request, exception=None):
     - HttpResponse: Renvoie la réponse HTTP rendue à partir du template spécifié
     avec un statut 404.
     """
+    sentry_sdk.capture_message("Page non trouvée (404): {}".format(request.path), level="warning")
+
     return render(request, "oc_lettings_site/404.html", status=404)
 
 
@@ -47,4 +50,7 @@ def custom_handler500(request):
     - HttpResponse: Renvoie la réponse HTTP rendue à partir du template spécifié
     avec un statut 500.
     """
+
+    sentry_sdk.capture_exception()
+
     return render(request, "oc_lettings_site/500.html", status=500)
