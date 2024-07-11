@@ -13,11 +13,13 @@ def index(request):
     En cas d'erreur, elle renvoie le template 404.html.
 
     Args:
-        request (HttpRequest): L'objet de la requête HTTP.
+
+    - request (HttpRequest): L'objet de la requête HTTP.
 
     Returns:
-        HttpResponse: La réponse HTTP avec le contenu HTML de la page d'accueil
-        ou le template 404.html en cas d'erreur.
+
+    - HttpResponse: La réponse HTTP avec le contenu HTML de la page d'accueil
+    - le template 404.html en cas d'erreur.
     """
     try:
         profiles_list = Profile.objects.all()
@@ -41,12 +43,14 @@ def profile(request, username):
     En cas d'erreur, elle renvoie le template 404.html.
 
     Args:
-        request (HttpRequest): L'objet de la requête HTTP.
-        username (str): Le nom d'utilisateur du profil à récupérer.
+
+    - request (HttpRequest): L'objet de la requête HTTP.
+    - username (str): Le nom d'utilisateur du profil à récupérer.
 
     Returns:
-        HttpResponse: La réponse HTTP avec le contenu HTML de la page de détail du profil
-        ou le template 404.html en cas d'erreur.
+
+    - HttpResponse: La réponse HTTP avec le contenu HTML de la page de détail du profil
+    - le template 404.html en cas d'erreur.
     """
     try:
         profile = get_object_or_404(Profile, user__username=username)
