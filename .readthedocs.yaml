@@ -1,29 +1,20 @@
-# .readthedocs.yaml
-
 version: 2
 
-# Set the OS, Python version and other tools you might need
 build:
-  os: ubuntu-22.04
+  os: "ubuntu-22.04"
   tools:
     python: "3.11"
   jobs:
-    # See https://github.com/readthedocs/readthedocs.org/issues/4912
-    pre_create_environment:
-      # Select Python version (keep in sync with other versions):
-      - asdf install python 3.11.9
-      - asdf global python 3.11.9
-      - python -m pip install --upgrade --no-cache-dir virtualenv
-
-      # Install poetry:
-      - asdf plugin add poetry
-      - asdf install poetry latest
-      - asdf global poetry latest
-      - poetry config virtualenvs.create false
-
+    post_create_environment:
+      # Install poetry
+      # https://python-poetry.org/docs/#installing-manually
+      - pip install poetry
+    post_install:
+      # Install dependencies with 'docs' dependency group
+      # https://python-poetry.org/docs/managing-dependencies/#dependency-groups
+      # VIRTUAL_ENV needs to be set manually for now.
+      # See https://github.com/readthedocs/readthedocs.org/pull/11152/
+      - VIRTUAL_ENV=$READTHEDOCS_VIRTUALENV_PATH poetry install --with docs
 
 sphinx:
-  configuration: doc/conf.py
-  fail_on_warning: true
-
-
+  configuration: docs/conf.py
