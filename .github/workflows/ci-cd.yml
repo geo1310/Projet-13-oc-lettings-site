@@ -15,49 +15,39 @@ jobs:
 
     steps:
 
-      # Étape 1: Récupére le code source avec les sous-modules
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           submodules: true
-          ref: ${{ github.ref }}  # Récupère la référence de la branche ou du commit
+          ref: ${{ github.ref }}  # Retrieves the branch or commit reference
         
-      # Étape 2: Configure Python 3.11.0
       - name: Set up Python 3.11.0
         uses: actions/setup-python@v5
         with:
           python-version: 3.11.0
 
-      # Étape 3: Installe Poetry et les dépendances du projet
       - name: Install Poetry
         run: pip install poetry
 
-      # Étape 4: Installe les dépendances du projet avec Poetry
       - name: Install dependencies
         run: poetry install
 
-      # Étape 5: Exécute les migrations de la base de données
       - name: Run migrations
         run: poetry run python manage.py migrate
 
-      # Étape 6: Collecte des fichiers statiques
       - name: Collect static files
         run: poetry run python manage.py collectstatic --noinput
 
-      # Étape 7: Exécute les tests avec une couverture de code minimum de 80%
       - name: Run tests with coverage
         run: |
           poetry run pytest --cov=. --cov-report=html --cov-fail-under=80
 
-      # Étape 8: Vérifie le style du code avec Flake8
       - name: Lint code
         run: poetry run flake8 .
 
-      # Étape 9: Vérifie le formatage du code avec Black
       - name: Format code with Black
         run: poetry run black --check .
 
-      # Étape 10: Archive les résultats des tests en cas d'échec
       - name: Archive test results
         if: failure()
         uses: actions/upload-artifact@v4
@@ -65,7 +55,6 @@ jobs:
           name: test-results
           path: reports/test-results.xml
 
-      # Étape 11: Toujours archiver le rapport de couverture
       - name: Archive coverage report
         if: always()
         uses: actions/upload-artifact@v4
@@ -75,26 +64,23 @@ jobs:
 
   deploy-docker:
     runs-on: ubuntu-latest
-    needs: build  # Attend la fin du job 'build' avant de démarrer
+    needs: build
     
-    if: github.ref == 'refs/heads/master'  # Déploie uniquement depuis la branche 'master'
+    if: github.ref == 'refs/heads/main'
     
     steps:
 
-      # Étape 1: Recovers source code with sub-modules
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           submodules: true
-          ref: ${{ github.ref }}  # Récupère la référence de la branche ou du commit
+          ref: ${{ github.ref }}
 
-      # Étape 2: Install Docker Compose
       - name: Install Docker Compose
         run: |
           sudo apt-get update
           sudo apt-get install docker-compose -y
 
-      # Étape 3: Log in to DockerHub
       - name: Log in to DockerHub
         uses: docker/login-action@v3
         with:
@@ -102,12 +88,10 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # Étape 4: Get short SHA
       - name: Get short SHA
         id: vars
         run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
-      # Étape 5: Build, Tag, Push and Pull Docker images.
       - name: Build, Tag, Push and Pull Docker images
         run: |
           SHORT_SHA=${{ env.SHA_SHORT }}
@@ -123,22 +107,19 @@ jobs:
   deploy-render:
     runs-on: ubuntu-latest
     needs: deploy-docker
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     steps:
 
-      # Étape 1: Recovers source code with sub-modules
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           submodules: true
-          ref: ${{ github.ref }}  # Récupère la référence de la branche ou du commit
+          ref: ${{ github.ref }}
 
-      # Étape 2: Get short SHA
       - name: Get short SHA
         id: vars
         run: echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
-      # Étape 3: Déploiement avec un webhook Render verifie le status 200 de la requete
       - name: Deploy to Render
         env:
           deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
