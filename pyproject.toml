@@ -8,6 +8,21 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 Django = "^5.0.6"
+sentry-sdk = {extras = ["django"], version = "^2.7.1"}
+python-dotenv = "^1.0.1"
+gunicorn = "^22.0.0"
+whitenoise = "^6.7.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^7.3.7"
+sphinx-rtd-theme = "^2.0.0"
+docutils = "<0.21"
+
+[tool.poetry.group.dev.dependencies]
 flake8 = "^7.1.0"
 pytest-django = "^4.8.0"
 black = "^24.4.2"
@@ -18,33 +33,39 @@ pytest-html = "^4.1.1"
 django-coverage = "^1.2.4"
 coverage = "^7.5.4"
 pytest-coverage = "^0.0"
-sentry-sdk = {extras = ["django"], version = "^2.7.1"}
-python-dotenv = "^1.0.1"
-gunicorn = "^22.0.0"
-whitenoise = "^6.7.0"
-uvicorn = "^0.30.1"
 
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "oc_lettings_site.settings"
+python_files = "test_*"
+addopts = "-v"
 
 [tool.coverage.run]
 branch = true
-omit = ["*tests", "/docs/**"]
+source = ["oc_lettings_site"]
+omit = [
+    "**/tests/*",
+    "**/migrations/*",
+    "__*",
+    "manage.py",
+    "asgi.py",
+    "wsgi.py",
+]
+
+[tool.djhtml]
+fail_under = 0
+rules = ["djhtml.rules.BasicChecksRule"]
+ignore_files = ["docs/**", ".venv/**"]
 
 [tool.flake8]
 max-line-length = 99
-exclude = ".venv/, docs/"
+exclude = "**/migrations/*,.venv/**"
 extend-ignore = [
-    # PEP 8 recommends to treat : in slices as a binary operator with the lowest priority, and to leave an equal
-    # amount of space on either side, except if a parameter is omitted (e.g. ham[1 + 1 :]).
-    # This behaviour may raise E203 whitespace before ':' warnings in style guide enforcement tools like Flake8.
-    # Since E203 is not PEP 8 compliant, we tell Flake8 to ignore this warning.
-    # https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#slices    
-    "E203"
+    "E203",
 ]
 
 [tool.black]
 line-length = 99
 
+[tool.isort]
+profile = "black"
+line_length = 99

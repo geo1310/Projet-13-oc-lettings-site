@@ -13,11 +13,13 @@ def index(request):
     En cas d'erreur, elle renvoie le template 404.html.
 
     Args:
-        request (HttpRequest): L'objet de la requête HTTP.
+
+    - request (HttpRequest): L'objet de la requête HTTP.
 
     Returns:
-        HttpResponse: La réponse HTTP avec le contenu HTML de la page d'accueil,
-        ou le template 404.html en cas d'erreur.
+
+    - HttpResponse: La réponse HTTP avec le contenu HTML de la page d'accueil,
+    - le template 404.html en cas d'erreur.
     """
     try:
         lettings_list = Letting.objects.all()
@@ -40,12 +42,14 @@ def letting(request, letting_id):
     En cas d'erreur, elle renvoie le template 404.html.
 
     Args:
-        request (HttpRequest): L'objet de la requête HTTP.
-        letting_id (int): L'ID de la location à récupérer.
+
+    - request (HttpRequest): L'objet de la requête HTTP.
+    - letting_id (int): L'ID de la location à récupérer.
 
     Returns:
-        HttpResponse: La réponse HTTP avec le contenu HTML de la page de détail de la location,
-        ou le template 404.html en cas d'erreur.
+
+    - HttpResponse: La réponse HTTP avec le contenu HTML de la page de détail de la location,
+    - le template 404.html en cas d'erreur.
     """
     try:
         letting = get_object_or_404(Letting, id=letting_id)
