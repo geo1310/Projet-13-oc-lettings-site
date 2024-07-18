@@ -11,7 +11,7 @@ COPY poetry.lock .
 # Étape 4 : Installation de Poetry et des dépendances (sans l'environnement racine)
 RUN pip install poetry \
     && poetry config virtualenvs.create false \
-    && poetry install --no-dev --no-interaction --no-ansi
+    && poetry install --without dev,docs --no-interaction --no-ansi
 
 # Étape 5 : Copier le code de l'application dans le conteneur
 COPY . .
