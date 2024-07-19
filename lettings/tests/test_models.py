@@ -38,7 +38,7 @@ def test_letting_model():
     address = Address.objects.create(
         number=100, street="street", city="city", state="ST", zip_code=1234, country_iso_code="abc"
     )
-    letting = Letting.objects.create(title="title", address_id=1)
+    letting = Letting.objects.create(title="title", address=address)
     expected_value = "title"
     assert str(letting) == expected_value
     assert address.id == letting.address_id
