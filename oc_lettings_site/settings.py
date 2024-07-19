@@ -116,14 +116,14 @@ DATABASES = {
             "NAME": BASE_DIR / "test_db.sqlite3",
         },
     },
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ["DB_NAME"],
-        'USER': os.environ["DB_USER"],
-        'PASSWORD': os.environ["DB_PASSWORD_RENDER"],
-        'HOST': os.environ["DB_HOST_RENDER"],
-        'PORT': os.environ["DB_PORT_POSTGRE"],
-    }
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ["DB_NAME"],
+        "USER": os.environ["DB_USER"],
+        "PASSWORD": os.environ["DB_PASSWORD_RENDER"],
+        "HOST": os.environ["DB_HOST_RENDER"],
+        "PORT": os.environ["DB_PORT_POSTGRE"],
+    },
 }
 
 
