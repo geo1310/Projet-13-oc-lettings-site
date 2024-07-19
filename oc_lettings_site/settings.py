@@ -109,13 +109,21 @@ WSGI_APPLICATION = "oc_lettings_site.wsgi.application"
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
+    "sqlite": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": os.path.join(BASE_DIR, "oc-lettings-site.sqlite3"),
         "TEST": {
             "NAME": BASE_DIR / "test_db.sqlite3",
         },
-    }
+    },
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ["DB_NAME"],
+        "USER": os.environ["DB_USER"],
+        "PASSWORD": os.environ["DB_PASSWORD_RENDER"],
+        "HOST": os.environ["DB_HOST_RENDER"],
+        "PORT": os.environ["DB_PORT_POSTGRE"],
+    },
 }
 
 
