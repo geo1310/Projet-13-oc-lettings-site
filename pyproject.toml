@@ -25,6 +25,7 @@ docutils = "<0.21"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^7.1.0"
+flake8-pyproject = "^1.2.3"
 pytest-django = "^4.8.0"
 black = "^24.4.2"
 isort = "^5.13.2"
