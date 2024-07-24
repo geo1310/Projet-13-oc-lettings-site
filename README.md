@@ -10,8 +10,6 @@
 [![Render](https://img.shields.io/badge/render-46E3B7?logo=render&logoColor=white)](https://render.com/)
 [![Render](https://img.shields.io/badge/render_oc_lettings_site-46E3B7?logo=render&logoColor=white)](https://oc-lettings-site-cuqa.onrender.com)
 
-
-
 [![pytest](https://img.shields.io/badge/pytest-passing-success)](https://pytest.org)
 [![Coverage](https://img.shields.io/badge/coverage-89%25-brightgreen)](https://coverage.readthedocs.io/en/latest/)
 
@@ -19,10 +17,12 @@
 [![Flake8](https://img.shields.io/badge/flake8-checked-blueviolet)](https://flake8.pycqa.org/en/latest/)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
+
 ![Repo Size](https://img.shields.io/github/repo-size/geo1310/Python-OC-Lettings-FR)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/geo1310/Python-OC-Lettings-FR)
 [![GitHub Action](https://img.shields.io/github/actions/workflow/status/geo1310/Python-OC-Lettings-FR/ci-cd.yml
 )](https://github.com/geo1310/Python-OC-Lettings-FR/actions?query=workflow%3ACI)
+[![Documentation Status](https://readthedocs.org/projects/gbriche-oc-lettings-site/badge/?version=latest)](http://gbriche-oc-lettings-site.readthedocs.io/en/latest/?badge=latest)
 
 
 
@@ -53,6 +53,8 @@ Domaines du site et du déploiement a améliorer et/ou ajouter :
 2. __[Configuration Read the Docs Sphinx](doc/_static/Configuration+Read+the+Docs.pdf)__
 
 3. __[Repo d'origine](https://github.com/OpenClassrooms-Student-Center/Python-OC-Lettings-FR.git)__
+
+4. __[Documentation du projet](http://gbriche-oc-lettings-site.readthedocs.io/)__
 
 ## Installation et activation de l'environnement Virtuel et des dépendances
 Création de l'environnement virtuel : 

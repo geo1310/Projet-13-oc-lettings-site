@@ -1,10 +1,9 @@
-from django.contrib import admin
-from django.urls import path, include
 from django.conf import settings
+from django.contrib import admin
+from django.urls import include, path
 from django.views.generic import TemplateView
 
 from . import views
-
 
 handler404 = "oc_lettings_site.views.custom_handler404"
 handler500 = "oc_lettings_site.views.custom_handler500"

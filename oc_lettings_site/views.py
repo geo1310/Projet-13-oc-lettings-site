@@ -1,5 +1,5 @@
-from django.shortcuts import render
 import sentry_sdk
+from django.shortcuts import render
 
 
 def index(request):

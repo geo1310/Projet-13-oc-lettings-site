@@ -1,7 +1,8 @@
 import os
 from pathlib import Path
-from dotenv import load_dotenv
+
 import sentry_sdk
+from dotenv import load_dotenv
 
 # environment variables
 file_env_path = Path(__file__).parent.parent / ".env"
@@ -12,13 +13,9 @@ load_dotenv(file_env_path, override=True)
 # sentry
 sentry_sdk.init(
     dsn=os.environ["SENTRY_DSN"],
-    # Set traces_sample_rate to 1.0 to capture 100%
-    # of transactions for performance monitoring.
     traces_sample_rate=1.0,
-    # Set profiles_sample_rate to 1.0 to profile 100%
-    # of sampled transactions.
-    # We recommend adjusting this value in production.
     profiles_sample_rate=1.0,
+    send_default_pii=False  # Personally Identifiable Information
 )
 
 # logging
