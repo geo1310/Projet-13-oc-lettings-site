@@ -11,4 +11,3 @@ Le projet utilise :
 - Docker et Docker-compose pour la conteneurisation.
 - Github Actions pour le pipeline CI / CD.
 - Render pour le déploiement de l'application.
-

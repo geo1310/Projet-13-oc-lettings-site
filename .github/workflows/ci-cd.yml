@@ -20,7 +20,7 @@ jobs:
         with:
           submodules: true
           ref: ${{ github.ref }}  # Retrieves the branch or commit reference
-        
+
       - name: Set up Python 3.11.0
         uses: actions/setup-python@v5
         with:
@@ -65,9 +65,9 @@ jobs:
   deploy-docker:
     runs-on: ubuntu-latest
     needs: build
-    
+
     if: github.ref == 'refs/heads/main'
-    
+
     steps:
 
       - name: Checkout code
