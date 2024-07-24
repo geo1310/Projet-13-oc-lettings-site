@@ -41,8 +41,8 @@ Domaines du site et du déploiement a améliorer et/ou ajouter :
 
     1. Refonte de l'architecture modulaire dans le repository GitHub ;
     2. Réduction de diverses dettes techniques sur le projet ;
-    3. Ajout d'un pipeline CI/CD ainsi que son déploiement ; 
-    4. Surveillance de l’application et suivi des erreurs via Sentry ; 
+    3. Ajout d'un pipeline CI/CD ainsi que son déploiement ;
+    4. Surveillance de l’application et suivi des erreurs via Sentry ;
     5. Création de la documentation technique de l’application avec Read The Docs et Sphinx.
 
 ## Documents du Projet
@@ -55,15 +55,15 @@ Domaines du site et du déploiement a améliorer et/ou ajouter :
 3. __[Repo d'origine](https://github.com/OpenClassrooms-Student-Center/Python-OC-Lettings-FR.git)__
 
 ## Installation et activation de l'environnement Virtuel et des dépendances
-Création de l'environnement virtuel : 
+Création de l'environnement virtuel :
 ```bash
 python -m venv .venv
 ```
-Activation de l'environnement virtuel se placer dans le dossier **.venv/scripts** et taper : 
+Activation de l'environnement virtuel se placer dans le dossier **.venv/scripts** et taper :
 ```bash
 ./activate
 ```
-Installation des dependances necessaires au projet avec poetry : 
+Installation des dependances necessaires au projet avec poetry :
 ```bash
 pip install poetry
 poetry install
@@ -80,7 +80,7 @@ python manage.py runserver
 - Confirmer que le site fonctionne et qu'il est possible de naviguer (vous devriez voir plusieurs profils et locations).
 
 
-#### Interface d'administration : 
+#### Interface d'administration :
 
 - Aller sur __http://localhost:8000/admin__
 - Connectez-vous avec l'utilisateur `admin`, mot de passe `Abc1234!`
@@ -103,7 +103,7 @@ Au lancement d'une image , mettre 8000 au host port.
 
 ## Tests
 
-Pour executer les tests se placer dans le dossier racine du projet : 
+Pour executer les tests se placer dans le dossier racine du projet :
 ```
 pytest
 ```
@@ -111,7 +111,7 @@ Pour connaitre la couverture totale des tests :
 ```
 pytest --cov=.
 ```
-Pour effectuer un rapport html des tests : 
+Pour effectuer un rapport html des tests :
 ```
 pytest --cov=. --cov-report html
 ```
