@@ -17,24 +17,10 @@
 [![Flake8](https://img.shields.io/badge/flake8-checked-blueviolet)](https://flake8.pycqa.org/en/latest/)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-<<<<<<< HEAD
-
-![Repo Size](https://img.shields.io/github/repo-size/geo1310/Python-OC-Lettings-FR)
-![GitHub commit activity](https://img.shields.io/github/commit-activity/m/geo1310/Python-OC-Lettings-FR)
-[![GitHub Action](https://img.shields.io/github/actions/workflow/status/geo1310/Python-OC-Lettings-FR/ci-cd.yml
-)](https://github.com/geo1310/Python-OC-Lettings-FR/actions?query=workflow%3ACI)
-[![Documentation Status](https://readthedocs.org/projects/gbriche-oc-lettings-site/badge/?version=latest)](http://gbriche-oc-lettings-site.readthedocs.io/en/latest/?badge=latest)
-=======
 ![Repo Size](https://img.shields.io/github/repo-size/geo1310/Projet-13-oc-lettings-site)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/geo1310/Projet-13-oc-lettings-site)
 [![GitHub Action](https://img.shields.io/github/actions/workflow/status/geo1310/Projet-13-oc-lettings-site/ci-cd.yml
 )](https://github.com/geo1310/Projet-13-oc-lettings-site/actions?query=workflow%3ACI)
->>>>>>> dev
-
-
-
-
-
 
 
 ## Résumé
@@ -80,8 +66,10 @@ poetry install
 ```
 
 ### Installation des pré-commit :
+
+Possibilité de mettre en service des pré-commit.
 ```
-pre-commit install
+pre-commit install 
 ```
 Les pré-commit effectuent un lintage du code avant chaque commit sur le code.
 

@@ -24,6 +24,9 @@ Installation des dependances necessaires au projet avec poetry :
 
 ```bash
 pip install poetry
+```
+
+```bash
 poetry install
 ```
 

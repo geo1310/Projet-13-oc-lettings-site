@@ -6,4 +6,5 @@
 pipfile
 .coverage
 staticfiles/
-_build/
+**/_build
+
