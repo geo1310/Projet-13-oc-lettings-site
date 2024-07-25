@@ -17,7 +17,7 @@ python -m venv .venv
 Activation de l'environnement virtuel se placer dans le dossier **.venv/scripts** et taper :
 
 ```bash
-./activate 
+./activate
 ```
 
 Installation des dependances necessaires au projet avec poetry :
