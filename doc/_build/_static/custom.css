@@ -1,0 +1,20 @@
+/* docs/source/_static/custom.css */
+
+.pdf-section-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.pdf-download-link {
+    display: block;
+    margin-bottom: 10px;
+    color: #3498db;
+    text-decoration: none;
+}
+
+.pdf-download-link:hover {
+    text-decoration: underline;
+}

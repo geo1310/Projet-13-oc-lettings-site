@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instructions d’installation &mdash; oc-lettings-site  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=a27ef991" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Guide de démarrage rapide" href="quick_start_guide.html" />
+    <link rel="prev" title="Projet oc-lettings-site" href="project_description.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            oc-lettings-site
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="project_description.html">Projet oc-lettings-site</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Instructions d’installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation-et-activation-de-l-environnement-virtuel-et-des-dependances">Installation et activation de l’environnement Virtuel et des dépendances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deploiement-sur-render">Déploiement sur render :</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#images-docker">Images Docker :</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tests">Tests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#journalisation">Journalisation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quick_start_guide.html">Guide de démarrage rapide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technologies_and_languages.html">Technologies et langages de programmation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database_structure.html">Structure de la base de données et modèles de données</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide.html">Guide d’utilisation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deployment_procedures.html">Procédures de déploiement et de gestion de l’application</a></li>
+<li class="toctree-l1"><a class="reference internal" href="technical_documentation.html">Technical documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules_views.html">Modules des Vues</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">oc-lettings-site</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Instructions d’installation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/installation_instructions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="instructions-d-installation">
+<h1>Instructions d’installation<a class="headerlink" href="#instructions-d-installation" title="Link to this heading"></a></h1>
+<p>Pour installer et exécuter le projet localement, suivez les étapes suivantes :</p>
+<p>Clonez le repository GitHub : <a class="reference external" href="https://github.com/geo1310/Projet-13-oc-lettings-site.git">https://github.com/geo1310/Projet-13-oc-lettings-site.git</a></p>
+<section id="installation-et-activation-de-l-environnement-virtuel-et-des-dependances">
+<h2>Installation et activation de l’environnement Virtuel et des dépendances<a class="headerlink" href="#installation-et-activation-de-l-environnement-virtuel-et-des-dependances" title="Link to this heading"></a></h2>
+<p>Création de l’environnement virtuel :</p>
+<p><code class="docutils literal notranslate"><span class="pre">`bash</span>
+<span class="pre">python</span> <span class="pre">-m</span> <span class="pre">venv</span> <span class="pre">.venv</span>
+<span class="pre">`</span></code></p>
+<p>Activation de l’environnement virtuel se placer dans le dossier <strong>.venv/scripts</strong> et taper :</p>
+<p><code class="docutils literal notranslate"><span class="pre">`bash</span>
+<span class="pre">./activate</span>
+<span class="pre">`</span></code></p>
+<p>Installation des dependances necessaires au projet avec poetry :</p>
+<p><code class="docutils literal notranslate"><span class="pre">`bash</span>
+<span class="pre">pip</span> <span class="pre">install</span> <span class="pre">poetry</span>
+<span class="pre">poetry</span> <span class="pre">install</span>
+<span class="pre">`</span></code></p>
+<p>Installation des pré-commit :</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">pre-commit</span> <span class="pre">install</span>
+<span class="pre">`</span></code></p>
+<p>Les pré-commit effectuent un lintage du code avant chaque commit sur le code.</p>
+<p>Pour travailler sans le mode DEBUG ( désactivé par défaut ) en local, collecter les fichiers statics :</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">collectstatic</span> <span class="pre">--noinput</span>
+<span class="pre">`</span></code></p>
+<p>Pour générer la documentation Sphinx en local :</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">poetry</span> <span class="pre">run</span> <span class="pre">sphinx-build</span> <span class="pre">-b</span> <span class="pre">html</span> <span class="pre">doc/</span> <span class="pre">doc/_build/</span>
+<span class="pre">`</span></code></p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>Executer le serveur en local :</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">python</span> <span class="pre">manage.py</span> <span class="pre">runserver</span>
+<span class="pre">`</span></code></p>
+<ul class="simple">
+<li><p>Aller sur <a class="reference external" href="http://localhost:8000">http://localhost:8000</a> dans un navigateur.</p></li>
+</ul>
+<p>Interface d’administration :</p>
+<ul class="simple">
+<li><p>Aller sur <a class="reference external" href="http://localhost:8000/admin">http://localhost:8000/admin</a></p></li>
+<li><p>Connectez-vous avec l’utilisateur <cite>admin</cite> , mot de passe <cite>Abc1234!</cite></p></li>
+</ul>
+</section>
+<section id="deploiement-sur-render">
+<h2>Déploiement sur render :<a class="headerlink" href="#deploiement-sur-render" title="Link to this heading"></a></h2>
+<p>L’application est accessible à l’adresse suivante :  <a class="reference external" href="https://oc-lettings-site-cuqa.onrender.com">https://oc-lettings-site-cuqa.onrender.com</a></p>
+<p>Interface d’administration : <a class="reference external" href="https://oc-lettings-site-cuqa.onrender.com/admin/login/?next=/admin/">https://oc-lettings-site-cuqa.onrender.com/admin/login/?next=/admin/</a></p>
+</section>
+<section id="images-docker">
+<h2>Images Docker :<a class="headerlink" href="#images-docker" title="Link to this heading"></a></h2>
+<p>Les images Docker sont taguées avec le commit court.</p>
+<p>Lien vers le hub public : <a class="reference external" href="https://hub.docker.com/r/gbriche/oc-lettings-site-web">https://hub.docker.com/r/gbriche/oc-lettings-site-web</a></p>
+<p>Au lancement d’une image , mettre 8000 au host port.</p>
+</section>
+<section id="tests">
+<h2>Tests<a class="headerlink" href="#tests" title="Link to this heading"></a></h2>
+<p>Pour executer les tests en local, se placer dans le dossier racine du projet :
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">pytest</span>
+<span class="pre">`</span></code>
+Pour connaitre la couverture totale des tests :
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">pytest</span> <span class="pre">--cov=.</span>
+<span class="pre">`</span></code>
+Pour effectuer un rapport html des tests :
+<code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">pytest</span> <span class="pre">--cov=.</span> <span class="pre">--cov-report</span> <span class="pre">html</span>
+<span class="pre">`</span></code>
+Lancer index.html du dossier htlmcov</p>
+</section>
+<section id="journalisation">
+<h2>Journalisation<a class="headerlink" href="#journalisation" title="Link to this heading"></a></h2>
+<p>L’application possède une journalisation sur sentry, enregistrant les exceptions levées et inattendues.</p>
+<p>Lien vers sentry : <a class="reference external" href="https://oc-student-gbriche.sentry.io/auth/login/oc-student-gbriche/">https://oc-student-gbriche.sentry.io/auth/login/oc-student-gbriche/</a></p>
+<p>Compte test sur Sentry pour accéder au logging :</p>
+<ul class="simple">
+<li><p>Email : <cite>ocstudentgeo&#64;gmail.com</cite></p></li>
+<li><p>Mot de passe : <cite>Pass_P13_OC_Python</cite></p></li>
+</ul>
+<p>Selectionner le projet : <cite>python-django</cite></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="project_description.html" class="btn btn-neutral float-left" title="Projet oc-lettings-site" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="quick_start_guide.html" class="btn btn-neutral float-right" title="Guide de démarrage rapide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Georges Briche.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
