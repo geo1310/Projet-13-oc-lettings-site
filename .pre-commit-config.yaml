@@ -9,16 +9,16 @@ repos:
       - id: check-yaml
       - id: check-added-large-files
 
-  - repo: local
-    hooks:
-      - id: black
-        name: black
-        entry: poetry run black
-        language: system
-        types: [file, python]
-
   - repo: https://github.com/pycqa/flake8
     rev: 7.1.0
     hooks:
       - id: flake8
         args: [--max-line-length=99]
+
+  - repo: https://github.com/psf/black
+    rev: 23.7.0
+    hooks:
+      - id: black
+        language_version: python3
+        args: [--line-length=99]
+        exclude: ^(migrations|docs|.venv)/

@@ -55,25 +55,38 @@ Domaines du site et du déploiement a améliorer et/ou ajouter :
 3. __[Repo d'origine](https://github.com/OpenClassrooms-Student-Center/Projet-13-oc-lettings-site.git)__
 
 ## Installation et activation de l'environnement Virtuel et des dépendances
-Création de l'environnement virtuel :
+### Création de l'environnement virtuel :
 ```bash
 python -m venv .venv
 ```
-Activation de l'environnement virtuel se placer dans le dossier **.venv/scripts** et taper :
+### Activation de l'environnement virtuel se placer dans le dossier **.venv/scripts** et taper :
 ```bash
 ./activate
 ```
-Installation des dependances necessaires au projet avec poetry :
+### Installation des dependances necessaires au projet avec poetry :
 ```bash
 pip install poetry
 poetry install
 
 ```
 
-Pour travailler sans le mode DEBUG ( par défaut ) en local, collecter les fichiers statics :
+### Installation des pré-commit :
+```
+pre-commit install
+```
+Les pré-commit effectuent un lintage du code avant chaque commit sur le code.
+
+
+### Pour travailler sans le mode DEBUG ( désactivé par défaut ) en local, collecter les fichiers statics :
 
 ```
 python manage.py collectstatic --noinput
+```
+
+### Pour générer la documentation Sphinx en local :
+
+```
+poetry run sphinx-build -b html doc/ doc/_build/
 ```
 
 ## Usage
@@ -84,7 +97,7 @@ python manage.py runserver
 ```
 - Aller sur __http://localhost:8000__ dans un navigateur.
 
-Page d'accueil de l'application : 
+    Page d'accueil de l'application :
 
 ![image](./doc/_static/images/Orange%20County_Lettings_index_page.png)
 
@@ -132,7 +145,7 @@ L'application possède une journalisation sur sentry, enregistrant les exception
 
 Lien vers sentry : https://oc-student-gbriche.sentry.io/auth/login/oc-student-gbriche/
 
-Compte test sur Sentry pour accéder au logging : 
+Compte test sur Sentry pour accéder au logging :
 
 *   __Email :__ `ocstudentgeo@gmail.com`
 *   __Mot de passe :__ `Pass_P13_OC_Python`
@@ -148,9 +161,9 @@ Lien vers le workflow : https://github.com/geo1310/Projet-13-oc-lettings-site/ac
 
 Le pipeline est conçu pour automatiser le processus de construction, de test et de déploiement de l'application, en garantissant une intégration continue et une livraison continue.
 
-Il est composé de trois étapes : 
+Il est composé de trois étapes :
 
-1. __Build : Construction et validation du code.__ 
+1. __Build : Construction et validation du code.__
 
     *   __-> Déclenché sur un Push ou une P.R sur n’importe quelle branche.__
     *   Simule l'installation de l'application et des dépendances.
@@ -161,7 +174,7 @@ Il est composé de trois étapes :
 
     *   __-> Déclenché sur un Push ou une P.R sur la branche main et aprés la réusssite du build.__
     *   Lien vers le Docker Hub : https://hub.docker.com/r/gbriche/oc-lettings-site-web
-    *   Les Images Docker sont taguées avec le commit court du push. 
+    *   Les Images Docker sont taguées avec le commit court du push.
 
 
 3. __Deploy Render : Déploiement sur la plateforme Render.__
